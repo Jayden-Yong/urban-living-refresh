@@ -14,6 +14,8 @@ export function Hero() {
     return () => clearInterval(t);
   }, [go]);
 
+  const active = slides[index] ?? slides[0]!;
+
   return (
     <section id="top" className="relative h-[85svh] min-h-[520px] w-full overflow-hidden bg-espresso">
       {slides.map((s, i) => (
@@ -37,13 +39,13 @@ export function Hero() {
         <div className="mx-auto w-full max-w-[1200px] px-6 md:px-10">
           <div className="max-w-xl">
             <p className="font-display text-xl italic text-espresso-foreground/85 md:text-2xl">
-              {slides[index].lead}
+              {active.lead}
             </p>
             <h1 className="mt-1 font-display text-5xl leading-[1.05] text-espresso-foreground md:text-7xl">
-              {slides[index].title}
+              {active.title}
             </h1>
             <p className="mt-4 text-sm text-espresso-foreground/80 md:text-base">
-              {slides[index].sub}
+              {active.sub}
             </p>
           </div>
         </div>
