@@ -62,26 +62,33 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --radius: 0.25rem;
+  --background: oklch(0.985 0.006 85);
+  --foreground: oklch(0.22 0.014 60);
+  --card: oklch(1 0.003 85);
+  --card-foreground: oklch(0.22 0.014 60);
+  --popover: oklch(1 0.003 85);
+  --popover-foreground: oklch(0.22 0.014 60);
+  --primary: oklch(0.66 0.078 75);
+  --primary-foreground: oklch(0.17 0.012 60);
+  --secondary: oklch(0.955 0.012 85);
+  --secondary-foreground: oklch(0.26 0.016 60);
+  --muted: oklch(0.949 0.011 85);
+  --muted-foreground: oklch(0.52 0.019 65);
+  --accent: oklch(0.93 0.021 82);
+  --accent-foreground: oklch(0.24 0.016 60);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.9 0.013 82);
+  --input: oklch(0.9 0.013 82);
+  --ring: oklch(0.66 0.078 75);
+  --espresso: oklch(0.21 0.017 55);
+  --espresso-foreground: oklch(0.96 0.008 85);
+  --brass: oklch(0.66 0.078 75);
+  --ivory: oklch(0.968 0.009 85);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Karla", system-ui, sans-serif;
+  --shadow-soft: 0 18px 50px -30px oklch(0.21 0.017 55 / 0.5);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -95,6 +102,15 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+@theme inline {
+  --color-espresso: var(--espresso);
+  --color-espresso-foreground: var(--espresso-foreground);
+  --color-brass: var(--brass);
+  --color-ivory: var(--ivory);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
 .dark {
@@ -140,5 +156,26 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
   }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 300;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
 }
