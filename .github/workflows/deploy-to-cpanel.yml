@@ -13,22 +13,29 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
-      - name: setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: setup Node
+        uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: 20
+          cache: 'npm'
 
       - name: install dependencies
-        run: bun install --frozen-lockfile
+        run: npm ci
 
       - name: build static site
         run: npm run build
 
-      - name: copy htaccess to dist
+      - name: flatten build output and copy htaccess
         run: |
-          if [ -f dist-static/.htaccess ]; then cp dist-static/.htaccess dist/; fi
+          rm -rf dist-tmp
+          mv dist/client dist-tmp
+          mv dist-tmp/* dist/
+          rmdir dist-tmp
+          cp .htaccess dist/
+          echo "=== dist contents ==="
+          ls -la dist/
 
       - name: upload to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0

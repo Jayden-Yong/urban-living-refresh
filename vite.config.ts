@@ -7,10 +7,11 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
  
  export default defineConfig({
+   // Disable nitro deploy plugin — we only want static prerender output for cPanel/FTP hosting.
+   // Without this, TanStack Start's nitro wrapper generates a server bundle (cloudflare-module
+   // preset) that is unnecessary and conflicts with pure static export.
+   nitro: false,
    tanstackStart: {
-     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-     // nitro/vite builds from this
-     server: { entry: "server" },
      // Static prerendering — pre-renders all routes to static HTML files for cPanel/FTP hosting.
      // NOTE: prerender runs automatically with `vite build` — no extra step needed.
      prerender: {
