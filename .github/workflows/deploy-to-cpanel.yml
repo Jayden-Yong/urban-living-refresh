@@ -1,37 +1,47 @@
 name: Deploy static site to cPanel
- 
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
- 
+
+concurrency:
+  group: deploy-cpanel
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
- 
+
     steps:
       - name: checkout
         uses: actions/checkout@v4
- 
+
+      - name: setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - name: setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
- 
+          node-version: 24
+
       - name: install dependencies
-        run: npm ci
- 
+        run: bun install --frozen-lockfile
+
       - name: build and export static site
-        run: npm run export
- 
+        run: bun run export
+
       - name: deploy to cPanel via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.CPANEL_HOST }}
           username: ${{ secrets.CPANEL_USERNAME }}
           password: ${{ secrets.CPANEL_PASSWORD }}
           local-dir: ./dist/
           server-dir: ${{ secrets.CPANEL_DIR }}
+          log-level: verbose
+          dangerous-clean-slate: false
