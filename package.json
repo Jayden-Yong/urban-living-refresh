@@ -10,8 +10,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "build:static": "vite build",
-    "export": "vite build && cp .htaccess dist/"
+    "export": "vite build && rm -rf dist-tmp && mkdir -p dist-tmp && cp -r dist/client/* dist-tmp/ && rm -rf dist && mv dist-tmp dist && cp .htaccess dist/"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

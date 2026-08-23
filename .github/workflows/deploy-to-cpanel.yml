@@ -1,43 +1,33 @@
 name: Deploy static site to cPanel
-
+ 
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
+ 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
+ 
     steps:
       - name: checkout
         uses: actions/checkout@v4
-
+ 
       - name: setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-
+ 
       - name: install dependencies
         run: npm ci
-
-      - name: build static site
-        run: npm run build
-
-      - name: flatten build output and copy htaccess
-        run: |
-          rm -rf dist-tmp
-          mv dist/client dist-tmp
-          mv dist-tmp/* dist/
-          rmdir dist-tmp
-          cp .htaccess dist/
-          echo "=== dist contents ==="
-          ls -la dist/
-
-      - name: upload to cPanel via FTP
+ 
+      - name: build and export static site
+        run: npm run export
+ 
+      - name: deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.CPANEL_HOST }}
