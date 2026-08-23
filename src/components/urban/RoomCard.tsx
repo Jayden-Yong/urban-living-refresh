@@ -1,4 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { BOOKING_URL, type Room } from "@/data/urban-living";
 import { MaterialIcon } from "./MaterialIcon";
 
@@ -73,10 +80,50 @@ export function RoomCard({ room }: { room: Room }) {
             <MaterialIcon name="event" className="text-[16px]" />
             Book room
           </a>
-          <span className="inline-flex items-center gap-2 text-xs text-muted-foreground">
-            <MaterialIcon name="photo_prints" className="text-[16px] text-brass" />
-            View gallery
-          </span>
+          <Dialog>
+            <DialogTrigger asChild>
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <MaterialIcon name="photo_prints" className="text-[16px] text-brass" />
+                View gallery
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto bg-card p-0">
+              <DialogHeader className="p-6 pb-0">
+                <DialogTitle className="font-display text-3xl">{room.name}</DialogTitle>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 border border-border px-3 py-1 text-xs text-muted-foreground">
+                    <MaterialIcon name="square_foot" className="text-[16px] text-brass" />
+                    {room.size}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 border border-border px-3 py-1 text-xs text-muted-foreground">
+                    <MaterialIcon name="group" className="text-[16px] text-brass" />
+                    {room.guests}
+                  </span>
+                </div>
+              </DialogHeader>
+              <div className="p-6 pt-4">
+                <p className="text-sm leading-relaxed text-muted-foreground">{room.description}</p>
+                <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {room.gallery.map((src, i) => (
+                    <div
+                      key={`${room.name}-${i}`}
+                      className="aspect-[4/3] overflow-hidden border border-border"
+                    >
+                      <img
+                        src={src}
+                        alt={`${room.name} gallery ${i + 1}`}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </article>

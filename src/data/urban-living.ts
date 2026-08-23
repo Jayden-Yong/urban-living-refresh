@@ -96,6 +96,8 @@ export type Room = {
   appliances: { icon: string; label: string }[];
   amenities: { icon: string; label: string }[];
   onRequest: { icon: string; label: string }[];
+  gallery: string[];
+  description: string;
 };
 
 export const rooms: Room[] = [
@@ -107,6 +109,14 @@ export const rooms: Room[] = [
     appliances: baseAppliances,
     amenities: [...baseAmenities, { icon: "kettle", label: "Flask with mugs" }],
     onRequest,
+    gallery: [
+      `${IMG}/standard/standard1.png`,
+      `${IMG}/standard/standard2.png`,
+      `${IMG}/standard/standard3.png`,
+      `${IMG}/standard/standard4.png`,
+    ],
+    description:
+      "Urban Living Standard Queen Rooms are decorated with the comfort of our guests in mind. Accommodating up to 2 persons and equipped with high tech comforts such as high speed internet access, USB ports, and smart TV.",
   },
   {
     name: "Superior Twin",
@@ -116,6 +126,14 @@ export const rooms: Room[] = [
     appliances: baseAppliances,
     amenities: [...baseAmenities, { icon: "kettle", label: "Flask with mugs" }],
     onRequest,
+    gallery: [
+      `${IMG}/twin/twin1.jpg`,
+      `${IMG}/twin/twin2.jpg`,
+      `${IMG}/twin/twin3.jpg`,
+      `${IMG}/twin/twin4.jpg`,
+    ],
+    description:
+      "Urban Living Superior Twin Rooms are decorated to give our guests an extra pop of colour to sprinkle more joy to their stay. Accommodating up to 2 persons and equipped with high tech comforts such as high speed internet access, USB ports, and smart TV.",
   },
   {
     name: "Suite",
@@ -125,6 +143,14 @@ export const rooms: Room[] = [
     appliances: withMiniBar,
     amenities: [...baseAmenities, { icon: "kettle", label: "Water kettle with mugs" }],
     onRequest,
+    gallery: [
+      `${IMG}/suite/suite1.png`,
+      `${IMG}/suite/suite2.png`,
+      `${IMG}/suite/suite3.png`,
+      `${IMG}/suite/suite4.png`,
+    ],
+    description:
+      "Urban Living Suites are decorated with the comfort of our guests in mind. Accommodating up to 2 persons and equipped with a lounging area and high tech comforts such as high speed internet access, USB ports, and smart TV.",
   },
   {
     name: "Deluxe Triple",
@@ -134,6 +160,14 @@ export const rooms: Room[] = [
     appliances: baseAppliances,
     amenities: [...baseAmenities, { icon: "kettle", label: "Water kettle with mugs" }],
     onRequest,
+    gallery: [
+      `${IMG}/triple/triple1.jpg`,
+      `${IMG}/triple/triple2.jpg`,
+      `${IMG}/triple/triple3.jpg`,
+      `${IMG}/standard/standard4.png`,
+    ],
+    description:
+      "Urban Living Deluxe Triple Rooms are decorated with the comfort of our guests in mind. Accommodating up to 3 persons and equipped with 1 queen size bed, 1 single bed, high tech comforts such as high speed internet access, USB ports, and smart TV.",
   },
   {
     name: "Junior Suite",
@@ -143,6 +177,14 @@ export const rooms: Room[] = [
     appliances: withMiniBar,
     amenities: [...baseAmenities, { icon: "kettle", label: "Water kettle with mugs" }],
     onRequest,
+    gallery: [
+      `${IMG}/junior/junior1.png`,
+      `${IMG}/junior/junior2.png`,
+      `${IMG}/junior/junior3.png`,
+      `${IMG}/junior/junior4.png`,
+    ],
+    description:
+      "Urban Living Junior Suite Rooms are decorated to give our guests an extra pop of colour to sprinkle more joy to their stay. Accommodating up to 3 persons and equipped with high tech comforts such as high speed internet access, USB ports, and smart TV.",
   },
   {
     name: "Penthouse",
@@ -152,6 +194,14 @@ export const rooms: Room[] = [
     appliances: withMiniBar,
     amenities: [...baseAmenities, { icon: "kettle", label: "Water kettle with mugs" }],
     onRequest,
+    gallery: [
+      `${IMG}/penthouse/penthouse1.png`,
+      `${IMG}/penthouse/penthouse2.png`,
+      `${IMG}/penthouse/penthouse3.png`,
+      `${IMG}/penthouse/penthouse4.png`,
+    ],
+    description:
+      "Urban Living Penthouses are decorated with the comfort of our guests in mind. Accommodating up to 2 adults and 2 children, the penthouse equipped with a lounging area and high tech comforts such as high speed internet access, USB ports, and smart TV.",
   },
 ];
 
