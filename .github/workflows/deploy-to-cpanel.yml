@@ -1,0 +1,40 @@
+name: Deploy static site to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+
+      - name: setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: build static site
+        run: npm run build
+
+      - name: copy htaccess to dist
+        run: |
+          if [ -f dist-static/.htaccess ]; then cp dist-static/.htaccess dist/; fi
+
+      - name: upload to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USERNAME }}
+          password: ${{ secrets.CPANEL_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ${{ secrets.CPANEL_DIR }}
